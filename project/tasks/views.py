@@ -11,7 +11,7 @@ def home(request):
     return render(request, "home.html")
 
 
-@csrf_exempt
+@app.task(bind=True, track_started=True)
 def run_task(request):
     if request.POST:
         task_type = request.POST.get("type")
